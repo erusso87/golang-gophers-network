@@ -7,4 +7,4 @@ Gophers Network
 - [ ] Implement more actions
 - [ ] Dev mode (hot reload?)
 - [ ] Add nginx as proxy
-- [ ] Add dependency manager
+- [X] Add dependency manager

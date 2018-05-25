@@ -3,10 +3,10 @@ FROM golang
 COPY ./ /go/src/gophers-network
 WORKDIR /go/src/gophers-network/gopher-services
 
-RUN go get github.com/kelseyhightower/envconfig \
- && go get github.com/lib/pq \
- && go get github.com/oklog/ulid \
- && go get github.com/tinrab/retry \
+# Go Dep
+RUN go get -u github.com/golang/dep/cmd/dep
+
+RUN dep ensure \
  && go build
 
 ENTRYPOINT ["./gopher-services"]

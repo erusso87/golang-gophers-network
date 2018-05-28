@@ -1,0 +1,22 @@
+version: "3.6"
+
+services:
+  postgres:
+    build: "./postgres"
+    environment:
+      POSTGRES_DB: "gopher_network_db_dev"
+      POSTGRES_USER: "gophers_dev"
+      POSTGRES_PASSWORD: "golang_dev"
+
+  gophers:
+    build: "./docker/app/dev/"
+    depends_on:
+      - "postgres"
+    ports:
+      - "8080:8080"
+    volumes:
+      - "./:/go/src/gophers-network:cached"
+    environment:
+      POSTGRES_DB: "gopher_network_db_dev"
+      POSTGRES_USER: "gophers_dev"
+      POSTGRES_PASSWORD: "golang_dev"

@@ -5,6 +5,6 @@ Gophers Network
 - [ ] Migrate to GraphQL
 - [ ] Improve the entities definition
 - [ ] Implement more actions
-- [ ] Dev mode (hot reload?)
+- [X] Dev mode (hot reload?)
 - [ ] Add nginx as proxy
 - [X] Add dependency manager

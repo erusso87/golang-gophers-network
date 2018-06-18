@@ -7,6 +7,7 @@ Gophers network example application made with Golang
 - [X] Migrate to GraphQL
 - [X] Improve the entities definition
 - [ ] Implement more actions
+- [ ] Refactor Postgres Docker
 - [X] Dev mode (hot reload?)
 - [ ] Add nginx as proxy for prod
 - [X] Add dependency manager

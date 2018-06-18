@@ -1,6 +1,8 @@
 DROP TABLE IF EXISTS gophers;
 CREATE TABLE gophers (
-  id VARCHAR(32) PRIMARY KEY,
-  body TEXT NOT NULL,
+  id VARCHAR(255) PRIMARY KEY,
+  name VARCHAR(255),
+  color VARCHAR(255),
+  weight FLOAT,
   created_at TIMESTAMP WITH TIME ZONE NOT NULL
 );

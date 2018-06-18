@@ -37,10 +37,10 @@
   name = "github.com/oklog/ulid"
   version = "0.3.0"
 
-[[constraint]]
-  branch = "master"
-  name = "github.com/tinrab/retry"
-
 [prune]
   go-tests = true
   unused-packages = true
+
+[[constraint]]
+  name = "github.com/graphql-go/graphql"
+  version = "0.7.5"

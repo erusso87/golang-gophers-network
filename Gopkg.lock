@@ -2,6 +2,24 @@
 
 
 [[projects]]
+  name = "github.com/graphql-go/graphql"
+  packages = [
+    ".",
+    "gqlerrors",
+    "language/ast",
+    "language/kinds",
+    "language/lexer",
+    "language/location",
+    "language/parser",
+    "language/printer",
+    "language/source",
+    "language/typeInfo",
+    "language/visitor"
+  ]
+  revision = "1e23489041ba90a66f317fe0deccb236a2fff3cb"
+  version = "v0.7.5"
+
+[[projects]]
   name = "github.com/kelseyhightower/envconfig"
   packages = ["."]
   revision = "f611eb38b3875cc3bd991ca91c51d06446afa14c"
@@ -17,20 +35,20 @@
   revision = "90697d60dd844d5ef6ff15135d0203f65d2f53b8"
 
 [[projects]]
+  branch = "master"
+  name = "github.com/mnmtanish/go-graphiql"
+  packages = ["."]
+  revision = "cef5a61bd62b996aa67029c6c858f673d6e51718"
+
+[[projects]]
   name = "github.com/oklog/ulid"
   packages = ["."]
   revision = "d311cb43c92434ec4072dfbbda3400741d0a6337"
   version = "v0.3.0"
 
-[[projects]]
-  branch = "master"
-  name = "github.com/tinrab/retry"
-  packages = ["."]
-  revision = "e979fd9b1d7980d567dd50fc993d06f1fb17eac3"
-
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "0239b05e63035823647b64048edeb03555d52719b5c19fca04dca79b68fac956"
+  inputs-digest = "5cf74a9bdbc0c96a7e0b002b3c4e38fef116fd0feceb770520115a62618c8dcc"
   solver-name = "gps-cdcl"
   solver-version = 1

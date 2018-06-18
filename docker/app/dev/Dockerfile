@@ -4,6 +4,6 @@ FROM golang
 RUN go get -u github.com/golang/dep/cmd/dep \
  && go get -u github.com/pilu/fresh
 
-WORKDIR /go/src/gophers-network/gopher-services
+WORKDIR /go/src/gophers-network
 
-ENTRYPOINT ["fresh","-c","../docker/app/dev/runner.conf","main.go"]
+ENTRYPOINT ["fresh","-c","docker/app/dev/runner.conf","main.go"]

@@ -26,17 +26,57 @@ all: help
 help : Makefile
 	@sed -n 's/^##//p' $<
 
-##  start-dev:		Start for development
+##
+##	
+## Development commands:
+## =====================
+##
+
+##  start-dev:	Start for development
 .PHONY : start-dev
 start-dev:
 	docker-compose -f docker-compose.dev.yaml up -d
+	
+##  logs-dev:	Logs for development
+.PHONY : logs-dev
+logs-dev:
+	docker-compose -f docker-compose.dev.yaml logs
 
-##  stop-dev:		Stop for development
+##  stop-dev:	Stop for development
 .PHONY : stop-dev
 stop-dev:
 	docker-compose -f docker-compose.dev.yaml stop
 
-##  down-dev:		Down for development
+##  down-dev:	Down for development
 .PHONY : down-dev
 down-dev:
 	docker-compose -f docker-compose.dev.yaml down
+
+##
+##      
+## Production commands:
+## =====================
+##
+
+##  start:	Start for production
+.PHONY : start
+start:
+	docker-compose -f docker-compose.prod.yaml up -d --build
+	
+##  logs:		Logs for production
+.PHONY : logs
+logs:
+	docker-compose -f docker-compose.prod.yaml logs
+
+##  stop:		Stop for production
+.PHONY : stop
+stop:
+	docker-compose -f docker-compose.prod.yaml stop
+
+##  down:		Down for production
+.PHONY : down
+down:
+	docker-compose -f docker-compose.prod.yaml down
+    
+##
+##

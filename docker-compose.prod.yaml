@@ -10,7 +10,9 @@ services:
       POSTGRES_PASSWORD: "golang"
 
   gophers:
-    build: "."
+    build:
+      dockerfile: "./docker/app/prod/Dockerfile"
+      context: "."
     depends_on:
       - "postgres"
     ports:

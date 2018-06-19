@@ -9,5 +9,6 @@ type Gopher struct {
 	Name string `json:"name"`
 	Color string `json:"color"`
 	Weight float32 `json:"weight"`
+	Image string `json:"image"`
 	CreatedAt time.Time `json:"created_at"`
 }

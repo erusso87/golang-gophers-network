@@ -35,7 +35,7 @@ help : Makefile
 ##  start-dev:	Start for development
 .PHONY : start-dev
 start-dev:
-	docker-compose -f docker-compose.dev.yaml up -d
+	docker-compose -f docker-compose.dev.yaml up -d --build
 	
 ##  logs-dev:	Logs for development
 .PHONY : logs-dev

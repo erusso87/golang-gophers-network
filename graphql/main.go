@@ -5,21 +5,28 @@ import (
 	"net/http"
 	"encoding/json"
 	"gophers-network/gophers"
+	"gophers-network/images"
 )
 
 type requestData struct {
-	Query string
+	Query     string
 	Variables string
 }
 
-func createSchema(gopherRepository gophers.GopherRepository) (graphql.Schema, error) {
+func createSchema(
+	gopherRepository gophers.GopherRepository,
+	imagesRepository images.ImageRepository,
+) (graphql.Schema, error) {
 	return graphql.NewSchema(graphql.SchemaConfig{
-		Query:    createRootQuery(gopherRepository),
-		Mutation: createRootMutation(gopherRepository),
+		Query:    createRootQuery(gopherRepository, imagesRepository),
+		Mutation: createRootMutation(gopherRepository, imagesRepository),
 	})
 }
 
-func CreateRequestSolver(gopherRepository gophers.GopherRepository) func(w http.ResponseWriter, r *http.Request) {
+func CreateRequestSolver(
+	gopherRepository gophers.GopherRepository,
+	imagesRepository images.ImageRepository,
+) func(w http.ResponseWriter, r *http.Request) {
 	return func(writer http.ResponseWriter, request *http.Request) {
 		decoder := json.NewDecoder(request.Body)
 
@@ -29,7 +36,7 @@ func CreateRequestSolver(gopherRepository gophers.GopherRepository) func(w http.
 			panic(err)
 		}
 
-		schema, _ := createSchema(gopherRepository)
+		schema, _ := createSchema(gopherRepository, imagesRepository)
 
 		result := graphql.Do(graphql.Params{
 			Schema:        schema,

@@ -8,6 +8,7 @@ import (
 	"github.com/kelseyhightower/envconfig"
 	"gophers-network/gophers"
 	"github.com/mnmtanish/go-graphiql"
+	"gophers-network/images"
 )
 
 type Config struct {
@@ -25,7 +26,7 @@ func configFromEnv() Config {
 	return config
 }
 
-func initGopherRepository(config Config) (gopherRepository gophers.GopherRepository) {
+func initRepositories(config Config) (gr gophers.GopherRepository, ir images.ImageRepository) {
 	addr := fmt.Sprintf(
 		"postgres://%s:%s@postgres/%s?sslmode=disable",
 		config.PostgresUser,
@@ -38,17 +39,24 @@ func initGopherRepository(config Config) (gopherRepository gophers.GopherReposit
 		log.Fatal(err.Error())
 	}
 
-	return gopherRepository
+	imageRepository, err := images.CreateRepository(addr)
+	if err != nil {
+		log.Fatal(err.Error())
+	}
+
+	return gopherRepository, imageRepository
 }
 
 func main() {
 	var config = configFromEnv()
-	var gopherRepository = initGopherRepository(config)
+	var gophersRepo, imagesRepo = initRepositories(config)
 
 	// TODO: Repository with infrastructure logic?
-	defer gopherRepository.Close()
+	// TODO: Dependencies container? (For repos)
+	defer gophersRepo.Close()
+	defer imagesRepo.Close()
 
-	http.HandleFunc("/graphql", graphql.CreateRequestSolver(gopherRepository))
+	http.HandleFunc("/graphql", graphql.CreateRequestSolver(gophersRepo, imagesRepo))
 	http.HandleFunc("/", graphiql.ServeGraphiQL)
 
 	log.Fatal(http.ListenAndServe(":8080", nil))

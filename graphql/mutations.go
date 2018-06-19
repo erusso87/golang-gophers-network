@@ -5,9 +5,13 @@ import (
 	"time"
 	"gophers-network/gophers"
 	"gophers-network/utils"
+	"gophers-network/images"
 )
 
-func createRootMutation(gopherRepository gophers.GopherRepository) *graphql.Object {
+func createRootMutation(
+	gopherRepository gophers.GopherRepository,
+	imagesRepository images.ImageRepository,
+) *graphql.Object {
 	return graphql.NewObject(graphql.ObjectConfig{
 		Name: "Mutation",
 		Fields: graphql.Fields{
@@ -40,6 +44,39 @@ func createRootMutation(gopherRepository gophers.GopherRepository) *graphql.Obje
 
 					err := gopherRepository.InsertGopher(gopher)
 					return gopher, err
+				},
+			},
+			"createGopherImage": &graphql.Field{
+				Type:        imageType,
+				Description: "Create new image for Gopher",
+				Args: graphql.FieldConfigArgument{
+					"gopher": &graphql.ArgumentConfig{
+						Type: graphql.String,
+					},
+					"content": &graphql.ArgumentConfig{
+						Type: graphql.String,
+					},
+				},
+				Resolve: func(params graphql.ResolveParams) (interface{}, error) {
+					gopherId, _ := params.Args["gopher"].(string)
+					content, _ := params.Args["content"].(string)
+
+					image := images.Image{
+						ID:        utils.CreateULID().String(),
+						Content:   content,
+						CreatedAt: time.Now().UTC(),
+					}
+
+					err := imagesRepository.InsertImage(image)
+					if err != nil {
+						panic(err)
+					}
+
+					gopher := gopherRepository.GetGopher(gopherId)
+					gopher.Image = image.ID
+					gopherRepository.UpdateGopher(*gopher)
+
+					return image, err
 				},
 			},
 		},

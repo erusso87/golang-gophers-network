@@ -6,7 +6,7 @@ Gophers network example application made with Golang
 #### Endpoints
 
 - [http://localhost:8080](http://localhost:8080) GiQL (GUI)
-- [http://localhost:8080/graphql](http://localhost:8080) GiQL (GUI) 
+- [http://localhost:8080/graphql](http://localhost:8080/graphql) Main GQL endpoint
 
 #### TODOs list
 - [X] Migrate to GraphQL
